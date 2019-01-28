@@ -22,7 +22,7 @@ const Layout = ({ children }) => (
       >
         <Header siteTitle={data.site.siteMetadata.title} />
         {children}
-        <footer style={{ backgroundColor: 'red', marginTop: 'auto' }}>
+        <footer style={{ marginTop: 'auto' }}>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>

@@ -4,6 +4,8 @@ import axios from 'axios'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import Hero from '../components/hero'
+import Search from '../components/search'
 
 class IndexPage extends React.Component {
   componentDidMount() {}
@@ -12,8 +14,8 @@ class IndexPage extends React.Component {
     return (
       <Layout>
         <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-        <h1>Testing</h1>
-        <Link to="/page-2/">Go to page 2</Link>
+        <Hero />
+        <Search />
       </Layout>
     )
   }
