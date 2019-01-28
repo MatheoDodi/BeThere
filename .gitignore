@@ -69,4 +69,4 @@ yarn-error.log
 .yarn-integrity
 
 # API Key
-.util/API.js
+util/API.js
