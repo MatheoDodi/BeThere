@@ -5,7 +5,7 @@ import axios from 'axios'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Hero from '../components/hero'
-import Search from '../components/search'
+import Search from '../components/search/search'
 
 class IndexPage extends React.Component {
   componentDidMount() {}
