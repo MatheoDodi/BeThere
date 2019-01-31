@@ -11,13 +11,14 @@ export const Dropdown = ({
 }) => (
   <DropdownDiv stateFocus={stateFocus}>
     <StateInput
+      onFocus={handleStateFocus}
       onMouseEnter={handleStateFocus}
       onClick={handleStateFocus}
       autoComplete="off"
       id="state"
       type="text"
       value={stateValue}
-      onChange={handleInputChange}
+      onChange={e => e.preventDefault()}
     />
     <StateInputLabel stateFocus={stateFocus} htmlFor="state">
       State
@@ -67,6 +68,11 @@ const StateInput = styled.input`
   color: #243b53;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  &:focus ~ .content {
+    display: block;
+    height: 200px;
+  }
 `
 
 const StateInputLabel = styled.label`

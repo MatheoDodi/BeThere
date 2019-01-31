@@ -56,7 +56,7 @@ const NavbarListIcon = styled.div`
     display: block;
     width: 25px;
     height: 3px;
-    background-color: black;
+    background-color: #0f609b;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -70,7 +70,7 @@ const NavbarListIcon = styled.div`
       width: 25px;
       display: block;
       position: absolute;
-      background-color: black;
+      background-color: #0f609b;
     }
 
     &::after {

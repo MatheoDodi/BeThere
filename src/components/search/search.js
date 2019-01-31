@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, createContext } from 'react'
 import styled from 'styled-components'
 
 import Dropdown from './dropwdown'
+import { getEventsByCityAndZipCode } from '../../util/API'
 
 class Search extends Component {
   state = {
@@ -12,27 +13,32 @@ class Search extends Component {
     stateInputValue: '',
   }
 
+  handleFormSubmit = async e => {
+    const { cityInputValue: city, stateInputValue: state } = this.state
+    e.preventDefault()
+    const response = await getEventsByCityAndZipCode(city, state)
+    const eventData = response.data
+    this.props.setEvents(eventData)
+  }
+
   handleInputChange = (e, inputType) =>
     this.setState({ [inputType]: e.target.value })
 
   handleSelectState = state => this.setState({ stateInputValue: state })
 
-  handleStatesBox = () =>
-    this.setState(prevState => ({ openStates: !prevState.openStates }))
-
   handleInputFocus = inputType => this.setState({ [inputType]: true })
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleFormSubmit}>
         <CityInputContainer inputFocused={this.state.isCityFocused}>
           <CityInput
+            autoComplete="off"
             onChange={e => this.handleInputChange(e, 'cityInputValue')}
             value={this.state.cityInputValue}
             onClick={() => this.handleInputFocus('isCityFocused')}
             id="city"
             type="text"
-            placeholder=" "
           />
           <CityInputLabel
             inputFocused={this.state.isCityFocused}
@@ -57,14 +63,14 @@ class Search extends Component {
 const Form = styled.form`
   display: flex;
   align-items: center;
-  padding: 4rem 6rem;
+  padding: 2.5rem 6rem 2rem 6rem;
   width: 50%;
   border-radius: 15px;
   background: #f0f4f8;
   margin: 0 auto;
   position: relative;
   z-index: 10;
-  top: -6rem;
+  top: -5rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 `
 
