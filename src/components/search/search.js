@@ -6,31 +6,47 @@ import Dropdown from './dropwdown'
 class Search extends Component {
   state = {
     openStates: false,
-    isFocused: false,
+    isCityFocused: false,
+    isStateFocused: false,
+    cityInputValue: '',
+    stateInputValue: '',
   }
+
+  handleInputChange = (e, inputType) =>
+    this.setState({ [inputType]: e.target.value })
+
+  handleSelectState = state => this.setState({ stateInputValue: state })
 
   handleStatesBox = () =>
     this.setState(prevState => ({ openStates: !prevState.openStates }))
 
-  handleInputFocus = () => this.setState({ isFocused: true })
+  handleInputFocus = inputType => this.setState({ [inputType]: true })
 
   render() {
     return (
       <Form>
-        <CityInputContainer inputFocused={this.state.isFocused}>
+        <CityInputContainer inputFocused={this.state.isCityFocused}>
           <CityInput
-            onClick={this.handleInputFocus}
+            onChange={e => this.handleInputChange(e, 'cityInputValue')}
+            value={this.state.cityInputValue}
+            onClick={() => this.handleInputFocus('isCityFocused')}
             id="city"
             type="text"
             placeholder=" "
           />
-          <CityInputLabel inputFocused={this.state.isFocused} htmlFor="city">
+          <CityInputLabel
+            inputFocused={this.state.isCityFocused}
+            htmlFor="city"
+          >
             Enter Your City
           </CityInputLabel>
         </CityInputContainer>
         <Dropdown
-          showStates={this.state.openStates}
-          openStatesBox={this.handleStatesBox}
+          stateFocus={this.state.isStateFocused}
+          handleStateFocus={() => this.handleInputFocus('isStateFocused')}
+          stateValue={this.state.stateInputValue}
+          handleInputChange={e => this.handleInputChange(e, 'stateInputValue')}
+          selectState={state => this.handleSelectState(state)}
         />
         <button>Search</button>
       </Form>
@@ -39,6 +55,8 @@ class Search extends Component {
 }
 
 const Form = styled.form`
+  display: flex;
+  align-items: center;
   padding: 4rem 6rem;
   width: 50%;
   border-radius: 15px;
@@ -47,7 +65,7 @@ const Form = styled.form`
   position: relative;
   z-index: 10;
   top: -6rem;
-  box-shadow: 0 8px 12px 5px rgba(0, 62, 107, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 `
 
 const CityInputContainer = styled.div`

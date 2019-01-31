@@ -11,7 +11,7 @@ const Hero = props => (
         </Logo>{' '}
         or be square!
       </h1>
-      <h3>What's Happing in your City</h3>
+      <h3>What's Happening in your City</h3>
     </div>
   </HeroContainer>
 )
